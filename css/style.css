@@ -1,0 +1,979 @@
+/* リセットCSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* 基本スタイル */
+body {
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8fbfe;
+  /* 固定ヘッダー分のパディングを追加 (ヘッダーの高さに応じて調整) */
+  padding-top: 70px; /* 例: ヘッダー高さ60px + 余裕10px */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ヘッダー */
+header {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  padding: 10px 0; /* 上下パディング */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed; /* 固定表示 */
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  height: 40px; /* ロゴの高さ調整 */
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+}
+
+.support-btn {
+  background-color: #1e50a2;
+  color: white !important;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.support-btn:hover {
+  background-color: #0b2a5b;
+  text-decoration: none;
+}
+
+/* ファーストビュー */
+.first-view {
+  /* background-color: #1e50a2; */ /* ← この行をコメントアウトまたは削除 */
+  background: linear-gradient(135deg, #1e50a2 0%, #2a75c9 60%, #4b8bf4 100%); /* ★グラデーションをここに記述 */
+  padding: 100px 0 60px; /* パディングを少し調整 (任意) */
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden; /* 微細パターンを追加した場合などのはみ出し防止 */
+}
+
+/* 微細なドットパターンを背景に追加 (オプション) */
+/* もし適用しない場合は、この ::before セレクタ全体を削除またはコメントアウトしてください */
+.first-view::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.5;
+  z-index: 0; /* コンテンツ(.first-view-content z-index:2)の背後 */
+}
+
+.first-view-content { /* このスタイルは既存のはずです */
+  position: relative;
+  z-index: 2; /* コンテンツを手前に */
+}
+
+/* メインタイトルとサブタイトルのスタイルも念のため確認 */
+.main-title {
+  font-size: 3.2rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2),
+               0 0 15px rgba(255,255,255,0.1);
+  letter-spacing: 1px;
+  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+.sub-title {
+  font-size: 1.6rem;
+  margin-bottom: 45px;
+  font-weight: 400;
+  opacity: 0.9;
+  animation: fadeInUp 0.8s ease-out 0.6s backwards;
+}
+
+/* アニメーションの定義 (もし未定義なら追加) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* CTAボタンのアニメーションも必要ならここに追加 */
+.cta-buttons .cta-button-primary,
+.cta-buttons .cta-button-secondary,
+.cta-buttons .cta-note {
+  animation: fadeInUp 0.7s ease-out backwards;
+}
+.cta-buttons .cta-button-primary { animation-delay: 0.9s; }
+.cta-buttons .cta-note:nth-of-type(1) { animation-delay: 1.0s; }
+.cta-buttons .cta-button-secondary { animation-delay: 1.2s; }
+.cta-buttons .cta-note:nth-of-type(2) { animation-delay: 1.3s; }
+
+/* CTA ボタン */
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* ボタン間の隙間 */
+  /* margin-bottom は削除（親要素 first-view の padding-bottom で調整） */
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 18px 50px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button-primary {
+  background-color: #ff9500;
+  color: #fff;
+  border: 2px solid #ff9500;
+}
+
+.cta-button-secondary {
+  background-color: #34c759;
+  color: #fff;
+  border: 2px solid #34c759;
+}
+
+.cta-note {
+  font-size: 0.9rem;
+  margin-top: 5px; /* ボタンとの隙間 */
+  opacity: 0.9;
+}
+
+/* セクション共通 */
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem; /* これはspanで囲まなかった部分の基本サイズ */
+  margin-bottom: 50px;
+  color: #1e50a2; /* h2全体のデフォルト色 */
+  position: relative;
+  padding-bottom: 15px;
+  line-height: 1.4;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #1e50a2 0%, #4b8bf4 100%);
+}
+
+/* ★新しいスタイルを追加★ */
+.section-title-text {
+  color: #1e50a2; /* オレンジ色 (例: #ff9500) 。実際の色コードに置き換えてください */
+  font-weight: bold; /* 必要であれば太字に */
+  /* font-size: 2rem; */ /* 親要素の .section-title から継承されるが、個別に指定も可能 */
+}
+
+/* メリットセクション */
+.benefits {
+  background-color: #e8f2ff;
+}
+
+.benefits-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.benefit-item {
+  flex: 1 1 300px;
+  max-width: 350px;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+  background-color: #fff;
+}
+
+.benefit-item:hover {
+  transform: translateY(-10px);
+}
+
+.benefit-icon {
+  width: 150px;   /* アイコン画像の幅 */
+  height: 150px;  /* アイコン画像の高さ */
+  margin: 0 auto 20px; /* 上下中央揃え、下に20pxのマージン */
+  display: block;      /* margin: auto を有効にするため */
+  object-fit: contain; /* 画像が指定サイズ内に収まるように調整 (アスペクト比維持) */
+}
+
+.benefit-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #1e50a2;
+  font-weight: 700;
+}
+
+.benefit-description {
+  color: #666;
+  text-align: left; /* ★変更箇所★ テキストを左寄せに */
+}
+
+.benefit-note {
+  /* HTMLに存在しないが念のため残す */
+  font-size: 0.9rem;
+  color: #ff9500;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* ★追加★ 上付き文字のスタイル調整 */
+sup {
+  font-size: 0.75em; /* 親要素のフォントサイズの75%にする */
+  vertical-align: super; /* HTMLのsupタグのデフォルトでもあるが明示 */
+  /* line-height: 0; */ /* 必要に応じて行間への影響を減らすコメントアウト */
+}
+
+
+/* キャンペーンセクション */
+.campaign {
+  background: #fff;
+}
+
+.campaign-banner {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.campaign-banner img {
+  width: 100%;
+  display: block;
+}
+
+.campaign-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.campaign-item {
+  flex: 1 1 400px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.campaign-item-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #1e50a2;
+  text-align: center;
+}
+
+.campaign-detail {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ff9500;
+}
+
+.campaign-conditions {
+  list-style: none;
+  padding-left: 0; /* リストのデフォルトパディングを削除 */
+}
+
+.campaign-conditions li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.campaign-conditions li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #4b8bf4;
+}
+
+.campaign-note {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 20px;
+  /* margin-bottom も必要に応じてデフォルト値を設定（例えば margin-bottom: 20px;） */
+}
+
+/* 「【キャンペーン条件】」専用のスタイル */
+.campaign-title-heading {
+  text-align: center;
+  /* .campaign-note の margin-top: 20px; が適用される */
+  margin-bottom: 2px; /* 「【キャンペーン条件】」の下のマージンを小さくする */
+}
+
+/* 「■共通：」以降のテキストブロックのスタイル */
+.campaign-conditions-text {
+  text-align: left;
+  line-height: 1.6; /* 行間はここで調整 */
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 5px;   /* ★変更箇所★ .campaign-note の margin-top を上書きして詰める (例: 5px) */
+}
+
+.campaign-conditions-text strong {
+  font-weight: bold;
+}
+
+/* ★新しいスタイルを追加★ */
+.campaign-item-image {
+  margin: 15px auto; /* 画像の上下に余白、左右は中央揃え */
+  max-width: 250px;   /* 画像の最大幅を指定 (例: 250px) 。実際の画像のサイズやデザインに合わせて調整 */
+  text-align: center; /* 画像自体がインライン要素の場合の中央揃え */
+}
+
+.campaign-item-image img {
+  width: 100%;        /* 親要素(.campaign-item-image)の幅いっぱいに表示 */
+  height: auto;       /* アスペクト比を保つ */
+  display: block;     /* margin: auto を有効にするため、また不要な下余白を防ぐ */
+}
+
+/* .campaign-detail のマージン調整 (画像との間隔) */
+.campaign-detail {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  /* margin-bottom: 25px; */ /* 既存のマージンボトムを調整または削除 */
+  margin-top: 15px; /* 画像との上の間隔 */
+  margin-bottom: 20px; /* 下のリストとの間隔 */
+  color: #ff9500;
+}
+
+/* 料金プランセクション */
+.pricing {
+  background-color: #fff;
+}
+
+.pricing-image {
+  max-width: 650px; /* ★変更箇所★ 親要素の最大幅を小さくする (例: 800px) */
+                      /* または、max-width: 100%; にしてコンテナ幅に追従させる */
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.pricing-image img {
+  width: 100%;
+  height: auto; /* 幅に合わせて高さを自動調整 */
+  display: block; /* 不要な下余白を防ぐ */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-info-box {
+  max-width: 750px;
+  margin: 0 auto 40px;
+  padding: 20px;
+  border-radius: 10px;    /* 角丸は維持 */
+  background-color: #fff; /* ★変更箇所★ 背景色を白に */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* ★変更箇所★ .pricing-plan-group と同じ影に、または削除 */
+}
+
+/* 画像コンテナのスタイル調整 */
+.pricing-image {
+  /* max-width: 1000px; */ /* ← .pricing-info-box で幅を制御するので、ここは 100% で良い */
+  width: 100%;             /* 親(.pricing-info-box)のパディングを考慮した幅になる */
+  margin: 0 auto 20px;     /* 画像の下のマージン (条件テキストとの間隔) */
+  text-align: center;
+}
+
+.pricing-image img {
+  width: 100%;
+  max-width: 100%; /* pricing-image の幅を超えないように */
+  height: auto;
+  display: block;
+  border-radius: 8px; /* 少し小さめの角丸にするとバランスが良いかも */
+  /* box-shadow は .pricing-info-box に移したので、ここからは削除しても良い */
+}
+
+.pricing-image {
+  width: 100%;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.pricing-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: none;
+  box-shadow: none;
+}
+
+/* 比較条件全体のコンテナのスタイル調整 */
+.pricing-conditions {
+  margin-top: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 各条件セクションのタイトル */
+.pricing-conditions .conditions-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  text-align: center; 
+}
+
+.pricing-conditions .conditions-title:first-child {
+  margin-top: 0;
+}
+
+/* 条件リスト (ul) */
+.pricing-conditions .conditions-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* 条件リストの各項目 (li) */
+.pricing-conditions .conditions-list li {
+  margin-bottom: 6px;
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.pricing-plans {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.pricing-plan-group {
+  flex: 0 1 auto; /* .pricing-plans が flex コンテナの場合のアイテムとしての挙動 */
+  max-width: 750px;   /* グループ全体の最大幅 */
+  background-color: #fff;
+  padding: 30px; /* グループ全体のパディング */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  position: relative; /* 必要に応じて */
+  /* margin-bottom は .pricing-plans の gap で管理するので削除またはコメントアウト */
+}
+
+.plan-item {
+  margin-bottom: 40px; /* グループ内で複数のプランがある場合、プラン間のマージン */
+}
+.plan-item:last-child {
+  margin-bottom: 0; /* グループ内の最後のプランは下のマージンをなくす */
+}
+
+/* 料金プランの注釈用スタイル (再作成) */
+.plan-notes {
+  text-align: left; /* 中央寄せだった場合。左寄せなら text-align: left; */
+  margin-top: 20px;   /* 上の要素との間隔 */
+  font-size: 0.8rem;  /* 文字の大きさ */
+  color: #555;       /* 文字色 (以前 #888 だった可能性もあります) */
+  line-height: 1.6;   /* 行の高さ */
+  /* 他にも padding や特定の font-weight などがあったかもしれません */
+}
+
+/* 新しい .plan-notes のスタイル */
+.plan-notes-title {
+  text-align: center; /* ★中央寄せにする */
+  font-weight: bold; /* 必要であれば太字に */
+  margin-top: 20px; /* 上の要素との間隔 */
+  margin-bottom: 5px; /* 下のリストとの間隔 */
+  font-size: 0.8rem; /* 他の注釈テキストと合わせるか、少し大きくするか調整 */
+  color: #555; /* 他の注釈テキストと合わせる */
+}
+
+/* 条件リスト部分のスタイル */
+.plan-notes-list {
+  text-align: left; /* ★左寄せを維持 */
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.8; /* 行間調整 */
+  /* padding-left: 1em; */ /* 必要であればインデント */
+  /* margin-top は .plan-notes-title の margin-bottom で調整 */
+}
+
+.plan-title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #1e50a2;
+  text-align: center;
+}
+
+.plan-discount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ff9500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.plan-details-wrapper {
+  margin-top: 20px;
+}
+
+/* ★修正★ 料金プランセクションのタイトル */
+.plan-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  background-color: #e8f2ff; /* 薄い青背景 */
+  color: #1e50a2;           /* 濃い青文字 */
+  padding: 10px 0;           /* ★変更★ 上下パディングのみ、左右パディングを削除 */
+  border-radius: 5px 5px 0 0;/* 上角を丸める */
+  margin-bottom: 0;          /* テーブルと密着 */
+  width: 100%;               /* ★追加★ 親要素いっぱいに広げる */
+  box-sizing: border-box;    /* 念のため明示 (グローバルで設定済みのはず) */
+}
+
+.plan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-top: none;
+  background-color: #fff;
+}
+
+.plan-table td {
+  border: 1px solid #ddd; /* セルの境界線は維持 */
+  padding: 10px 5px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* ★修正★ テーブルの項目名セル (30A, 40A, 120kWhまで など) */
+.plan-table td:not(.price) {
+  text-align: center;
+  width: 55%;
+  background-color: #1e50a2; /* 青色の背景 */
+  color: #fff;             /* 白色の文字 */
+  font-weight: 700;         /* 見やすくするために太字にすることも検討 */
+}
+
+/* ★修正★ 金額セル */
+.plan-table td.price {
+  text-align: right;
+  font-weight: 700;
+  white-space: nowrap;
+  width: 45%;
+  background-color: #fff;     /* 白色の背景 */
+  color: #1e50a2;           /* 青系の文字色 */
+}
+
+.plan-highlight {
+  font-weight: 700;
+  color: #ff9500;
+}
+
+/* お客様の声 */
+/* お客様の声 */
+.testimonials {
+  background-color: #e8f2ff;
+}
+
+.testimonials-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.testimonial {
+  flex: 1 1 300px;
+  max-width: 350px; /* 元の幅に戻すか、コンテンツに合わせて調整 */
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  display: flex;         /* ★変更★ Flexbox を使用 */
+  flex-direction: column;/* ★変更★ 要素を縦に並べる */
+  align-items: center;   /* ★変更★ 水平方向中央揃え */
+  text-align: center;    /* ★追加★ テキスト要素を中央揃え */
+}
+
+.testimonial-title {
+  font-size: 1.2rem;
+  margin-bottom: 15px; /* 画像とのマージン */
+  color: #1e50a2;
+}
+
+.testimonial-text {
+  margin-bottom: 15px; /* 画像とのマージン */
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.7; /* 行間を少し広げる */
+}
+
+/* お客様の声 画像コンテナ */
+.testimonial-image-container {
+  margin-bottom: 15px; /* Author との間のマージン */
+  /* flex-shrink: 0; は縦積みなので不要 */
+}
+
+/* お客様の声 画像 */
+.testimonial-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* testimonial-content クラスはHTMLから削除したため、関連スタイルも削除またはコメントアウト */
+/* .testimonial-content { ... } */
+
+.testimonial-author {
+  /* text-align: right; は .testimonial の text-align: center; で上書きされる */
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #888;
+  margin-top: auto; /* ★追加★ もしカードの高さが揃っていて、Authorを最下部に配置したい場合 */
+                     /* ただし、カードの高さが可変の場合は効果が薄い */
+}
+
+/* FAQ */
+.faq {
+  background-color: #fff;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.faq-question {
+  background-color: #1e50a2;
+  color: #fff;
+  padding: 15px 20px;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.faq-question::after {
+  content: '＋'; /* デフォルトは閉じた状態 */
+  position: absolute;
+  right: 20px;
+  transition: transform 0.3s;
+}
+
+/* active クラスが付いたらアイコン変更 */
+.faq-item.active .faq-question::after {
+  content: '－';
+  /* transform: rotate(45deg); 必要であれば回転アニメーションなど */
+}
+
+.faq-answer {
+  background-color: #fff;
+  padding: 20px;
+  display: none; /* デフォルトは非表示 */
+  border-top: 1px solid #eee; /* 区切り線 */
+}
+
+/* active クラスが付いたら表示 */
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+/* フッター */
+footer {
+  background-color: #1e50a2;
+  color: white;
+  padding: 30px 0; /* パディング調整 */
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column; /* 縦並びに変更 */
+  align-items: center; /* 中央揃え */
+  gap: 20px; /* 要素間の隙間 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-links {
+  text-align: center;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px; /* 左右のマージン */
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-links .separator {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.copyright {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  /* 上の要素との gap で調整するため、padding-top と border-top は削除 */
+}
+
+/* レスポンシブ対応 */
+
+/* PC表示 (タブレット横向き以上を想定) */
+@media (min-width: 769px) {
+  .plan-details-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 0 auto; /* これは .pricing-plan の *内部* で料金表を中央揃えにするため */
+  }
+  .plan-section {
+    width: 320px;
+    margin-bottom: 0;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+  }
+
+  .sub-title {
+    font-size: 1.2rem;
+  }
+
+  .section {
+    padding: 50px 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .cta-button {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    gap: 15px;
+  }
+
+  .campaign-item-title {
+    font-size: 1.3rem;
+  }
+
+  .benefits-list,
+  .campaign-content,
+  .testimonials-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .benefit-item,
+  .campaign-item,
+  .pricing-plan,
+  .testimonial {
+    max-width: 90%;
+    flex-basis: auto;
+  }
+
+  /* ★修正★ モバイルでの料金プランセクションの余白 */
+  .plan-section:not(:last-child) {
+    margin-bottom: 40px; /* 基本料金と電力量料金の間に余白 */
+  }
+  .footer-container {
+    gap: 15px;
+  }
+  .footer-links a {
+    margin: 0 5px;
+  }
+  .testimonial {
+    max-width: 90%;
+  }
+  .benefit-icon {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 55px;
+  }
+  .header-container {
+    padding: 0 15px;
+  }
+  .logo {
+    height: 35px;
+  }
+  .support-btn {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+  .container {
+    padding: 0 15px;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+
+  .sub-title {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+  }
+
+  .cta-button {
+    padding: 12px 30px;
+    font-size: 1rem;
+    width: 90%;
+    max-width: 300px;
+  }
+  .cta-note {
+    font-size: 0.8rem;
+  }
+
+  .benefit-title,
+  .testimonial-title { /* plan-titleは別途調整の可能性あり */
+    font-size: 1.1rem;
+  }
+  .benefit-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem; /* この行は画像化により不要ですが、元のコメントに合わせて残しました。実際には影響しません。 */
+  }
+  .benefit-description,
+  .campaign-detail,
+  .testimonial-text, /* plan-discountは別途調整の可能性あり */
+  .faq-answer p {
+    font-size: 0.9rem;
+  }
+  .faq-question {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+  .faq-question::after {
+    right: 15px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links .separator {
+    display: none;
+  }
+
+  .plan-table {
+    font-size: 0.85rem;
+  }
+  .plan-table td {
+    padding: 8px 3px;
+  }
+  .plan-table td.price {
+    font-weight: 600; /* スマホでは少し抑えるか、PCと同じ700にするか検討 */
+  }
+
+  /* ★修正★ スマホでの料金プランセクションタイトル */
+  .plan-section-title {
+    font-size: 1rem;
+    padding: 8px; /* パディング調整 */
+  }
+  /* ★修正★ スマホでの料金プランセクションの余白 */
+  .plan-section:not(:last-child) {
+    margin-bottom: 30px; /* 少し詰める */
+  }
+  .testimonial-image {
+    width: 70px;
+    height: 70px;
+  }
+  .testimonial-title {
+    font-size: 1.1rem;
+  }
+  .testimonial-text {
+    font-size: 0.9rem;
+  }
+
+}
